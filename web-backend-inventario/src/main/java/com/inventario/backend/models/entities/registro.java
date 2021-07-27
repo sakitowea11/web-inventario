@@ -1,11 +1,17 @@
 package com.inventario.backend.models.entities;
 
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +30,14 @@ public class registro {
 	
 	@Column(name="hora_reg")
 	private String hora;
-
+	
+	@OneToMany(mappedBy = "registro",fetch = FetchType.LAZY)
+	private List<producto> productos;
+	
+	@JoinColumn(name= "idadministrador",nullable  = false)
+	@OneToOne(fetch = FetchType.LAZY)
+	private administrador administrador;
+	
 	public registro() {
 		super();
 	}
@@ -49,6 +62,12 @@ public class registro {
 	}
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+	public administrador getAdministrador() {
+		return administrador;
+	}
+	public void setAdministrador(administrador administrador) {
+		this.administrador = administrador;
 	}
 	
 	

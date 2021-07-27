@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,8 @@ public class administrador {
 	@Column(name="contraseña_administrador")
 	private int contraseñaAdministrador;
 	
+	@OneToOne(mappedBy ="administrador")
+	private registro registros;
 
 	public administrador() {
 		super();

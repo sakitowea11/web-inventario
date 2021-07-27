@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +36,10 @@ public class categoria {
 	
 	@Column(name="snaks_cat")
 	private String Snaks;
+	
+	@JoinColumn(name= "idproducto", referencedColumnName = "idproducto")//se mapea una clave foranea
+	@ManyToOne
+	private producto producto;
 
 	public categoria() {
 		super();
@@ -90,6 +96,14 @@ public class categoria {
 
 	public void setSnaks(String snaks) {
 		Snaks = snaks;
+	}
+
+	public producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(producto producto) {
+		this.producto = producto;
 	}
 	
 	

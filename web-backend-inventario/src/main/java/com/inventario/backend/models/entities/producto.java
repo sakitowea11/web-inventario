@@ -1,11 +1,17 @@
 package com.inventario.backend.models.entities;
 
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +23,7 @@ public class producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
+	
 	@Column(name = "idproducto")
 	private Integer idproducto;  //atributo que se mapea con la primary key
 	
@@ -38,6 +45,18 @@ public class producto {
 	@Column(name="fechaelaboracion_pro")
 	private String fechaelaboracion;
 	
+	
+	@OneToMany(mappedBy = "producto",fetch = FetchType.LAZY)
+	private List<categoria> categorias;
+	
+	@JoinColumn(name= "idproveedor", referencedColumnName = "idproveedor")//se mapea una clave foranea
+	@ManyToOne
+	private proveedor proveedor;
+	
+	@JoinColumn(name= "idregistro", referencedColumnName = "idregistro")//se mapea una clave foranea
+	@ManyToOne
+	private registro registro;
+
 	public producto() {
 		super();
 	}
@@ -101,6 +120,22 @@ public class producto {
 
 	public void setFechaelaboracion(String fechaelaboracion) {
 		this.fechaelaboracion = fechaelaboracion;
+	}
+
+	public proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public registro getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(registro registro) {
+		this.registro = registro;
 	}
 	
 	
