@@ -1,5 +1,6 @@
 package com.inventario.backend.models.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -17,8 +18,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="productos")
 
-public class producto {
-	
+public class producto implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
